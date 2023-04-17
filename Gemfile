@@ -52,3 +52,5 @@ gem "devise-jwt"
 gem 'dotenv-rails'
 gem 'graphql', '~> 2.0', '>= 2.0.21'
 gem 'graphiql-rails', '~> 1.9'
+gem 'sib-api-v3-sdk'
+gem 'sidekiq', '<7'

@@ -6,6 +6,9 @@ class User < ApplicationRecord
          jwt_revocation_strategy: self 
   enum role: [:reader,:admin]
   after_initialize :set_default_role, :if => :new_record?
+  
+  scope :requests, -> { where(admin: true) }
+
   def set_default_role
     self.role ||= :user 
   end

@@ -16,4 +16,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
     def register_failed(err)
       render json: { message: "User could not be created successfully.",errors: err},status: :unprocessable_entity
     end
+
+    def sign_up_params
+      params.require(:user).permit(:name,:email ,:password, :password_confirmation,:admin)
+    end
+  
 end

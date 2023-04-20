@@ -10,9 +10,56 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_17_015948) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_18_122537) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "article_authors", force: :cascade do |t|
+    t.bigint "article_id"
+    t.bigint "author_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["article_id"], name: "index_article_authors_on_article_id"
+    t.index ["author_id"], name: "index_article_authors_on_author_id"
+  end
+
+  create_table "articles", force: :cascade do |t|
+    t.string "title"
+    t.text "content"
+    t.string "description"
+    t.string "url"
+    t.string "urlToImage"
+    t.datetime "publishedAt"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "topic_id", null: false
+    t.bigint "author_id", null: false
+    t.index ["author_id"], name: "index_articles_on_author_id"
+    t.index ["topic_id"], name: "index_articles_on_topic_id"
+  end
+
+  create_table "author_topics", force: :cascade do |t|
+    t.bigint "author_id"
+    t.bigint "topic_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["author_id"], name: "index_author_topics_on_author_id"
+    t.index ["topic_id"], name: "index_author_topics_on_topic_id"
+  end
+
+  create_table "authors", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_authors_on_name", unique: true
+  end
+
+  create_table "topics", force: :cascade do |t|
+    t.string "category", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category"], name: "index_topics_on_category", unique: true
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "name"
@@ -36,4 +83,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_17_015948) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "articles", "authors"
+  add_foreign_key "articles", "topics"
 end

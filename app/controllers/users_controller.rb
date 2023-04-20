@@ -35,7 +35,7 @@ class UsersController < ApplicationController
   end
 
   def approve_user 
-    users = User.where(id: params[:request_ids]
+    users = User.where(id: params[:request_ids])
 
     users.each {|user| user.update(role: "admin")}
     render json: {

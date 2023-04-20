@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user! 
   before_action :set_user, only: %i[ show update destroy]
   before_action :validate_user, only: %i[ show update destroy]
   before_action :validate_admin, only: %i[request_admin approve_user]
@@ -26,18 +25,18 @@ class UsersController < ApplicationController
   end
 
   def request_admin
-   @user = User.requests
+    @user = User.requests
 
-   if @user.count > 0
-    render json: @user
-  else
-    render json: {message: "No user request(s) found"},status: :ok
-  end
-
+    if @user.count > 0
+      render json: @user
+    else
+      render json: {message: "No user request(s) found"},status: :ok
+    end
   end
 
   def approve_user 
-    users = User.where(id: params[:request_ids])
+    users = User.where(id: params[:request_ids]
+
     users.each {|user| user.update(role: "admin")}
     render json: {
       message: "Users promoted to admin"
@@ -46,11 +45,11 @@ class UsersController < ApplicationController
 
   private
 
-    def set_user
-      @user = User.find(params[:id])
-    end
+  def set_user
+    @user = User.find(params[:id])
+  end
 
-    def user_params
-      params.require(:user).permit(:password, :password_confirmation,:request_ids)
-    end
+  def user_params
+    params.require(:user).permit(:password, :password_confirmation,:request_ids)
+  end
 end

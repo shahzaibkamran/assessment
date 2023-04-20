@@ -1,9 +1,7 @@
 class TopicsController < ApplicationController
-  before_action :authenticate_user! 
   before_action :set_topic, only: %i[ show update destroy ]
-  before_action :validate_admin, only: %i[create update destroy]
+  before_action :validate_admin, only: %i[update destroy]
   
-
   def index
     @topics = Topic.all
 
@@ -12,16 +10,6 @@ class TopicsController < ApplicationController
 
   def show
     render json: @topic
-  end
-
-  def create
-    @topic = Topic.new(topic_params)
-
-    if @topic.save
-      render json: @topic, status: :created, location: @topic
-    else
-      render json: @topic.errors, status: :unprocessable_entity
-    end
   end
 
   def update
@@ -37,11 +25,12 @@ class TopicsController < ApplicationController
   end
 
   private
-    def set_topic
-      @topic = Topic.find(params[:id])
-    end
 
-    def topic_params
-      params.fetch(:topic, {})
-    end
+  def set_topic
+    @topic = Topic.find(params[:id])
+  end
+
+  def topic_params
+    params.require(:topic).permit(:category)
+  end
 end

@@ -1,6 +1,5 @@
 class AuthorsController < ApplicationController
-  before_action :authenticate_user! 
-  before_action :validate_admin, only: %i[create update destroy]
+  before_action :validate_admin, only: %i[ update destroy]
   before_action :set_author, only: %i[ show update destroy ]
 
   def index
@@ -11,16 +10,6 @@ class AuthorsController < ApplicationController
 
   def show
     render json: @author
-  end
-
-  def create
-    @author = Author.new(author_params)
-
-    if @author.save
-      render json: @author, status: :created, location: @author
-    else
-      render json: @author.errors, status: :unprocessable_entity
-    end
   end
 
   def update
@@ -36,11 +25,12 @@ class AuthorsController < ApplicationController
   end
 
   private
-    def set_author
-      @author = Author.find(params[:id])
-    end
 
-    def author_params
-      params.fetch(:author, {})
-    end
+  def set_author
+    @author = Author.find(params[:id])
+  end
+
+  def author_params
+    params.require(:author).permit(:name)
+  end
 end

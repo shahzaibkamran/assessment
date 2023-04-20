@@ -3,13 +3,16 @@ class User < ApplicationRecord
 
   devise :database_authenticatable,:rememberable,:recoverable,:confirmable,
          :validatable,:registerable,:jwt_authenticatable,
-         jwt_revocation_strategy: self 
-  enum role: [:reader,:admin]
+         jwt_revocation_strategy: self
+
   after_initialize :set_default_role, :if => :new_record?
   after_initialize :set_default_admin, :if => :new_record?
+
   validates :email, presence: true, format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i, message: "must be a valid email address" }
   validates :email, presence: true, uniqueness: true
   validates :password, presence: true, length: { minimum: 6 }
+
+  enum role: [:reader,:admin]
 
   scope :requests, -> { where(admin: true) }
 
@@ -30,5 +33,4 @@ class User < ApplicationRecord
     super
     SendinblueWorker.perform_async(self.email, self.name)
   end
-
 end

@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[ show update destroy]
-  before_action :validate_user, only: %i[ show update destroy]
+  before_action :set_user, only: %i[show update destroy]
+  before_action :validate_user, only: %i[show update destroy]
   before_action :validate_admin, only: %i[request_admin approve_user]
   
   def index
@@ -50,6 +50,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:password, :password_confirmation,:request_ids)
+    params.require(:user).permit(:password, :password_confirmation, :request_ids)
   end
 end

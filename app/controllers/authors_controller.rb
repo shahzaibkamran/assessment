@@ -1,6 +1,6 @@
 class AuthorsController < ApplicationController
-  before_action :validate_admin, only: %i[ update destroy]
-  before_action :set_author, only: %i[ show update destroy ]
+  before_action :validate_admin, only: %i[update destroy]
+  before_action :set_author, only: %i[show update destroy]
 
   def index
     @authors = Author.all

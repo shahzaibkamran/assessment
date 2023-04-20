@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
   before_action :validate_admin, only: %i[update destroy]
-  before_action :set_article, only: %i[ show update destroy ]
+  before_action :set_article, only: %i[show update destroy]
 
   def index
     @articles = Article.all
@@ -31,6 +31,6 @@ class ArticlesController < ApplicationController
   end
 
   def article_params
-    params.require(:article).permit(:title,:description,:url,:urlToImage,:content)
+    params.require(:article).permit(:title, :description, :url, :urlToImage, :content)
   end
 end

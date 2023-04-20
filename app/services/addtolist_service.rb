@@ -9,6 +9,7 @@ class AddtolistService
       list_id = 2
       contact_emails = SibApiV3Sdk::AddContactToList.new
       contact_emails = {'emails' => [@email]}
+
       begin
         result = api_instance.add_contact_to_list(list_id, contact_emails)
         p result

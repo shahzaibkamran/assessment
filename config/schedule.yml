@@ -1,0 +1,8 @@
+
+business_worker:
+  every: 3.hours
+  class: "BusinessWorker"
+news_worker:
+  every: 2.days
+  at: "17:00"
+  class: "NewsWorker"

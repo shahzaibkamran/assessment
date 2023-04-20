@@ -81,6 +81,8 @@ test:
 #
 production:
   <<: *default
+  host: ec2-34-241-82-91.eu-west-1.compute.amazonaws.com
+  port: 5432
   database: d7dqu2mt2rjlcu
   username: xwcxknhwkvalkc
   password: 2f5a65deab2510b446ca4b601f5a2e0a95a546aee56459261e2aa34d1d9a2e15

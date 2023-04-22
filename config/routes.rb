@@ -14,4 +14,5 @@ Rails.application.routes.draw do
   patch 'user/:id', to: 'users#update'
   get 'users/requests', to: 'users#request_admin'
   post 'users/approve', to: 'users#approve_user'
+  get 'search', to: 'livearticles#search'
 end

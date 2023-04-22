@@ -56,3 +56,6 @@ gem 'sib-api-v3-sdk'
 gem 'sidekiq', '<7'
 gem 'sidekiq-cron'
 gem 'httparty'
+
+gem "searchkick", "~> 5.2"
+gem "elasticsearch", "~> 7.17"

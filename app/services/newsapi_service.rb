@@ -9,12 +9,12 @@ class NewsapiService
   def call
     response = HTTParty.get(@url)
     puts "Response Status:" + response.code.to_s
-    last_article_id = Article.last&.id unless Article.count == 0
+    last_article_id =  Article.count > 0 ? Article.last&.id : 0
 
-    response['articles'].each do |article|
+    response['articles']&.each do |article|
       if article["author"].present?
-        id = Author.find_by_name(article["author"])&.id
-        author = Author.create!(name:article["author"]) if id.nil? 
+        author = Author.find_by_name(article["author"])
+        author = author.nil?? Author.create!(name:article["author"]) : author
         Article.create(title: article["title"], description: article["description"], content: article["content"], url: article["url"], urlToImage: article["urlToImage"], publishedAt: article["publishedAt"],topic_id: @topic_id,author_id: author.id) 
       end
     end

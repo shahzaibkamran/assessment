@@ -35,12 +35,15 @@ class UsersController < ApplicationController
   end
 
   def approve_user 
-    users = User.where(id: params[:request_ids])
-
-    users.each {|user| user.update(role: "admin")}
-    render json: {
-      message: "Users promoted to admin"
-    }
+    begin
+      users = User.find(user_params["request_ids"])
+      users.each {|user| user.update!(role: "admin")}
+      render json: {
+        message: "Users promoted to admin"
+      }
+    rescue StandardError => error
+     render json: { error: error}
+    end
   end
 
   private
@@ -50,6 +53,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:password, :password_confirmation, :request_ids)
+    params.require(:user).permit(:password, :password_confirmation, :request_ids => [])
   end
 end

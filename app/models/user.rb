@@ -10,7 +10,6 @@ class User < ApplicationRecord
 
   validates :email, presence: true, format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i, message: "must be a valid email address" }
   validates :email, presence: true, uniqueness: true
-  validates :password, presence: true, length: { minimum: 6 }
 
   enum role: [:reader,:admin]
 

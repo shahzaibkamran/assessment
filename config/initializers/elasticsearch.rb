@@ -3,8 +3,6 @@ if Rails.env == "production"
         {
           host: ENV['ELASTIC_SEARCH_URL'],
           scheme: 'https',
-          path: '',
-          port: 443,
           user: ENV['ELASTIC_SEARCH_USERNAME'],
           password: ENV['ELASTIC_SEARCH_PASSWORD']
         }

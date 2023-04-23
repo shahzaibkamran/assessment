@@ -58,4 +58,4 @@ gem 'sidekiq-cron'
 gem 'httparty'
 
 gem "searchkick", "~> 5.2"
-gem "elasticsearch", "~> 5"
+gem "elasticsearch", "~> 7.17"

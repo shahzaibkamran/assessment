@@ -39,12 +39,16 @@ gem "rack-cors"
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
+  gem 'rspec-rails'
+end
+
+group :test do
+    gem 'factory_bot_rails'
+    gem 'faker'
 end
 
 group :development do
   gem "pry"
-  # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
-  # gem "spring"
 end
 
 gem "devise"
@@ -56,6 +60,5 @@ gem 'sib-api-v3-sdk'
 gem 'sidekiq', '<7'
 gem 'sidekiq-cron'
 gem 'httparty'
-
 gem "searchkick", "~> 5.2"
 gem "elasticsearch", "~> 7.17"

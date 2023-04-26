@@ -34,7 +34,7 @@ class UsersController < ApplicationController
     end
   end
 
-  def approve_user 
+  def approve_user
     begin
       users = User.find(user_params["request_ids"])
       users.each {|user| user.update!(role: "admin")}

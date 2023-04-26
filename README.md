@@ -37,3 +37,8 @@ Elastic search is not working on heroku unable to configure ES on heroku. Howeve
 **Postman Api**
 [Postman Collection link] (https://www.postman.com/navigation-saganist-4951077/workspace/assessment/request/16358007-c84f1747-f73f-40ca-931b-78c50b5f0c4f “Postman”)
 
+**About the project**
+- I have not used api/v1 convention since its an assessment and there won't be any other version of this api.
+- I have wrote rspecs to a certain degree just. I deliberately didn't cover each and every endpoint to save time since its just an assessment.However I have covered all the major endpoints.
+- I deliberatly pushed .env to git so you won't have to struggle in configurating news and sendinblue. 
+- Incase if I have skipped anything feel free to reach out to me.
